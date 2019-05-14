@@ -51,3 +51,37 @@ class Solution:
                     else:
                         break
         return res
+
+    def inorder_traversal_recursive(self,root: 'TreeNode') -> 'List[int]':
+        """中序遍历 使用递归
+
+        :param root: 根节点
+        :return:
+        """
+        left_list = list()
+        right_list = list()
+        if root is None:
+            return []
+        if root.left is not None:
+            left_list = self.inorder_traversal_recursive(root.left)
+        if root.right is not None:
+            right_list = self.inorder_traversal_recursive(root.right)
+        res = [root.val]
+        left_list.extend(res)
+        left_list.extend(right_list)
+        return left_list
+
+
+def main():
+    node_1 = TreeNode(3)
+    node_2 = TreeNode(2)
+    root_node = TreeNode(1)
+    root_node.right = node_2
+    node_2.left = node_1
+    solution = Solution()
+    # print(solution.inorder_traversal(root_node))
+    print(solution.inorder_traversal_recursive(root_node))
+
+
+if __name__ == '__main__':
+    main()
